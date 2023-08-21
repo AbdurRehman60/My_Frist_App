@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "453869567973",
+    "project_id": "myapp-123-cm",
+    "storage_bucket": "myapp-123-cm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:453869567973:android:eca2a22d77e66db731b90c",
+        "android_client_info": {
+          "package_name": "com.example.fristapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "453869567973-l6k2dmeg51g66ba8ok4db8bke5mergre.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBU_ORwDkumPDGiWWEeWQKbEShKhyEZGCk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "453869567973-l6k2dmeg51g66ba8ok4db8bke5mergre.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
