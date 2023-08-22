@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fristapp/Views/Login_Views.dart';
 import 'package:fristapp/Views/Register_View.dart';
 import 'package:fristapp/firebase_options.dart';
+
+import 'Views/Verifying_Email.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,15 +49,17 @@ class homepage extends StatelessWidget {
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.done:
-                  // final user = FirebaseAuth.instance.currentUser;
-                  // if (user?.emailVerified ?? false) {
-                  //   print('Your Verified user');
-                  // } else {
-                  //   print('you need to verified your email frist time');
-
-                  //    return Emailverfing();
-                  // }
-                  return loginview();
+                  final user = FirebaseAuth.instance.currentUser;
+                  if (user != null) {
+                    if (user.emailVerified) {
+                      print('Email is Verified');
+                    } else {
+                      return const Emailverfing();
+                    }
+                  } else {
+                    return const loginview();
+                  }
+                  return const Text('Done');
                 default:
                   return CircularProgressIndicator();
               }
