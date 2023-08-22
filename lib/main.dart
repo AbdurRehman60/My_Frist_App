@@ -1,7 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fristapp/Views/Login_Views.dart';
+import 'package:fristapp/Views/Register_View.dart';
 import 'package:fristapp/firebase_options.dart';
 
 void main() {
@@ -22,6 +22,10 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const homepage(),
+      routes: {
+        '/login/': (context) => loginview(),
+        '/register/': (context) => Registerview(),
+      },
     );
   }
 }
@@ -52,32 +56,8 @@ class homepage extends StatelessWidget {
                   // }
                   return loginview();
                 default:
-                  return Text('Loading...');
+                  return CircularProgressIndicator();
               }
             }));
-  }
-}
-
-class Emailverfing extends StatefulWidget {
-  const Emailverfing({super.key});
-
-  @override
-  State<Emailverfing> createState() => _EmailverfingState();
-}
-
-class _EmailverfingState extends State<Emailverfing> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text('please Verfing your email Address:'),
-        TextButton(
-            onPressed: () async {
-              final user = FirebaseAuth.instance.currentUser;
-              await user?.sendEmailVerification();
-            },
-            child: Text('Send Email Verifincating'))
-      ],
-    );
   }
 }
