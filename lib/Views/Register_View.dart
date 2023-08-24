@@ -55,7 +55,7 @@ class _RegisterviewState extends State<Registerview> {
 
               try {
                 final UserCredential = await FirebaseAuth.instance
-                    .signInWithEmailAndPassword(
+                    .createUserWithEmailAndPassword(
                         email: email, password: password);
                 print('my ceck');
 
