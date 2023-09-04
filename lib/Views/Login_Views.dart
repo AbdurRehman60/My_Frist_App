@@ -1,28 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const loginview(),
-    );
-  }
-}
+import 'package:fristapp/Constants/Routes.dart';
+import 'package:fristapp/Utilities/ShowErrorDialog.dart';
 
 class loginview extends StatefulWidget {
   const loginview({super.key});
@@ -77,20 +56,30 @@ class _loginviewState extends State<loginview> {
               final password = _password.text;
 
               try {
-                final UserCredential = await FirebaseAuth.instance
+                final UserCredexntial = await FirebaseAuth.instance
                     .signInWithEmailAndPassword(
                         email: email, password: password);
-                print('my ceck');
 
-                print(UserCredential);
+                Navigator.of(context)
+                    .pushNamedAndRemoveUntil(NotesRoute, (route) => false);
               } on FirebaseAuthException catch (e) {
                 if (e.code == 'user-not-found') {
-                  print(
+                  print('chel');
+                  await ShowErrorDialog(
+                    context,
                     'User Not Found',
                   );
                 } else if (e.code == 'Wrong-password') {
-                  print(
-                    'Password By Worng',
+                  print('wrong');
+                  await ShowErrorDialog(
+                    context,
+                    'Enter Worng creditianls',
+                  );
+                } else {
+                  print('other');
+                  await ShowErrorDialog(
+                    context,
+                    'Error ${e.code}',
                   );
                 }
               }
@@ -100,7 +89,7 @@ class _loginviewState extends State<loginview> {
           TextButton(
               onPressed: () {
                 Navigator.of(context)
-                    .pushNamedAndRemoveUntil('/register/', (route) => false);
+                    .pushNamedAndRemoveUntil(RegisterRoute, (route) => false);
               },
               child: Text('Not Register Yet? Fristly regsister here'))
         ],

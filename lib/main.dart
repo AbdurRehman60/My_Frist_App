@@ -1,15 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:fristapp/Constants/Routes.dart';
 import 'package:fristapp/Views/Login_Views.dart';
 import 'package:fristapp/Views/Register_View.dart';
 import 'package:fristapp/firebase_options.dart';
+
 //import 'dart:developer' as devtools show log;
 
 import 'Views/Verifying_Email.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MyApp());
 }
 
@@ -27,8 +30,10 @@ class MyApp extends StatelessWidget {
       ),
       home: const homepage(),
       routes: {
-        '/login/': (context) => loginview(),
-        '/register/': (context) => Registerview(),
+        loginRoute: (context) => const loginview(),
+        RegisterRoute: (context) => const Registerview(),
+        NotesRoute: (context) => const NotesView(),
+        EmailverfingRoute: (context) => const Emailverfing(),
       },
     );
   }
@@ -66,7 +71,6 @@ class _homepageState extends State<homepage> {
               switch (snapshot.connectionState) {
                 case ConnectionState.done:
                   final user = FirebaseAuth.instance.currentUser;
-
                   print(user);
                   if (user != null) {
                     if (user.emailVerified) {
@@ -110,7 +114,7 @@ class _NotesViewState extends State<NotesView> {
                   if (shouldlogout) {
                     await FirebaseAuth.instance.signOut();
                     Navigator.of(context)
-                        .pushNamedAndRemoveUntil('/login/', (_) => false);
+                        .pushNamedAndRemoveUntil(loginRoute, (_) => false);
                   }
               }
             },
