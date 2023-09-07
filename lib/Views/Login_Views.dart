@@ -1,7 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fristapp/Constants/Routes.dart';
 import 'package:fristapp/Utilities/ShowErrorDialog.dart';
+import 'package:fristapp/services/auth/auth_exceptions.dart';
+import 'package:fristapp/services/auth/auth_services.dart';
 
 class loginview extends StatefulWidget {
   const loginview({super.key});
@@ -56,13 +57,12 @@ class _loginviewState extends State<loginview> {
               final password = _password.text;
 
               try {
-                final UserCredexntial =
-                    await FirebaseAuth.instance.signInWithEmailAndPassword(
+                await AuthService.firebase().logIn(
                   email: email,
                   password: password,
                 );
-                final user = FirebaseAuth.instance.currentUser;
-                if (user?.emailVerified ?? false) {
+                final user = AuthService.firebase().currentUser;
+                if (user?.isEmailVerified ?? false) {
                   Navigator.of(context).pushNamedAndRemoveUntil(
                     NotesRoute,
                     (route) => false,
@@ -73,31 +73,18 @@ class _loginviewState extends State<loginview> {
                     (route) => false,
                   );
                 }
-              } on FirebaseAuthException catch (e) {
-                if (e.code == 'user-not-found') {
-                  print('chel');
-                  await ShowErrorDialog(
-                    context,
-                    'User Not Found',
-                  );
-                } else if (e.code == 'Wrong-password') {
-                  print('wrong');
-                  await ShowErrorDialog(
-                    context,
-                    'Enter Worng creditianls',
-                  );
-                } else {
-                  print('other');
-                  await ShowErrorDialog(
-                    context,
-                    'Error ${e.code}',
-                  );
-                }
-              } catch (e) {
+              } on UserNotFoundAuthException {
                 await ShowErrorDialog(
                   context,
-                  e.toString(),
+                  'User Not Found',
                 );
+              } on WorngPasswordAuthException {
+                await ShowErrorDialog(
+                  context,
+                  'Enter Worng creditianls',
+                );
+              } on GenericAuthException {
+                await ShowErrorDialog(context, 'Authentication');
               }
             },
             child: const Text('Login'),

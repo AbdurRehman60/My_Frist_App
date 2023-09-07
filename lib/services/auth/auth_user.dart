@@ -8,4 +8,6 @@ class AuthUser {
   AuthUser(this.isEmailVerified);
 
   factory AuthUser.fromFirebase(User user) => AuthUser(user.emailVerified);
+
+  reload() {}
 }
