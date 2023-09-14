@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fristapp/Constants/Routes.dart';
 import 'package:fristapp/Views/Login_Views.dart';
 import 'package:fristapp/Views/Register_View.dart';
-import 'package:fristapp/Views/notes_view.dart';
+import 'package:fristapp/Views/notes/new_notes.dart';
+import 'package:fristapp/Views/notes/notes_view.dart';
 import 'package:fristapp/services/auth/auth_services.dart';
 
 //import 'dart:developer' as devtools show log;
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         RegisterRoute: (context) => const Registerview(),
         NotesRoute: (context) => const NotesView(),
         EmailverfingRoute: (context) => const Emailverfing(),
+        newNoteRoute: (context) => const NewNoteView(),
       },
     );
   }
