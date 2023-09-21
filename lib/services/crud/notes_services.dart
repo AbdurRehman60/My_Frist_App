@@ -1,4 +1,4 @@
-import 'dart:async';
+/*import 'dart:async';
 import 'package:fristapp/services/crud/crud_exceptions.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -89,7 +89,7 @@ class NotesServices {
     }
   }
 
-  Future<int> deleteAllNotes() async {
+  Future<int> deleteAllNotes({required int id}) async {
     final db = _getDatabaseOrThrow();
     final numberOfDeletions = await db.delete(noteTable);
     _note = [];
@@ -150,7 +150,7 @@ class NotesServices {
     final result = await db.query(
       userTbale,
       limit: 1,
-      where: 'eamil?',
+      where: 'email =?',
       whereArgs: [email.toLowerCase()],
     );
 
@@ -294,7 +294,7 @@ class DatabaseNotes {
 }
 
 const userTbale = 'user';
-const noteTable = 'note';
+const noteTable = 'notes_2';
 const dbName = 'notes.db';
 const idcolumn = 'id';
 const emailcolumn = 'email';
@@ -307,11 +307,11 @@ const createUserTable = '''CREATE TABLE IF NOT EXISTS "User" (
 	PRIMARY KEY("ID" AUTOINCREMENT)
 );''';
 
-const creatNotesTable = '''CREATE TABLE IF NOT EXISTS "notes" (
+const creatNotesTable = '''CREATE TABLE IF NOT EXISTS "Notes_2" (
 	"id"	INTEGER NOT NULL,
 	"user_id"	INTEGER NOT NULL,
 	"Text"	TEXT,
 	"is_sync_with cloud"	INTEGER NOT NULL DEFAULT 0,
 	PRIMARY KEY("id" AUTOINCREMENT),
 	FOREIGN KEY("user_id") REFERENCES "User"("ID")
-);''';
+);''';*/

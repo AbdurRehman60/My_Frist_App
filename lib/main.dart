@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fristapp/Constants/Routes.dart';
 import 'package:fristapp/Views/Login_Views.dart';
@@ -9,10 +10,13 @@ import 'package:fristapp/services/auth/auth_services.dart';
 //import 'dart:developer' as devtools show log;
 
 import 'Views/Verifying_Email.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 

@@ -1,4 +1,4 @@
-class DatabaseAlreadyOpenExpection implements Exception {}
+/*class DatabaseAlreadyOpenExpection implements Exception {}
 
 class UnableToGetDocumentsDirectory implements Exception {}
 
@@ -14,4 +14,4 @@ class CouldNotDeleteNote implements Exception {}
 
 class CouldNotFindNote implements Exception {}
 
-class CouldNotUpdateNote implements Exception {}
+class CouldNotUpdateNote implements Exception {}*/
