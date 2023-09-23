@@ -41,6 +41,8 @@ class _NewNotViewState extends State<NewNoteView> {
   }
 
   Future<CloudNote> createNewNote() async {
+//    final WidgetNote = context.getArgument<DatabaseNotes>();
+
     final existingNote = _note;
     if (existingNote != null) {
       return existingNote;
